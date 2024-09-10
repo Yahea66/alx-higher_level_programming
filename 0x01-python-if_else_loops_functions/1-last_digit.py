@@ -9,6 +9,6 @@ if last > 5:
     string = "and is greater than 5"
 elif last < 6:
     string = "and is less than 6 and not 0"
-else:
+elif last == 0:
     string = "and is 0"
 print(f"Last digit of {number} is {last} {string}") 
