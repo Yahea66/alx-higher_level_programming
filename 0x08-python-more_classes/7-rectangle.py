@@ -1,16 +1,17 @@
 #!/usr/bin/python3
-"""Module 0-rectangle
+"""Module 7-rectangle
 
 This module defines a class Rectangle that serves as a template
-to define a rectangle. This class can be expanded later with properties
-and methods that describe the characteristics and behaviors of a rectangle.
+to define a rectangle. This class is expanded with properties
+and methods that describe the characteristics and behaviors of a rectangle,
+including customizable print symbols.
 """
 
 class Rectangle:
     """Class that defines a rectangle."""
 
     number_of_instances = 0 
-    print_symbol = "#" 
+    print_symbol = "#"
 
     def __init__(self, width=0, height=0):
         """Initialize a new Rectangle with optional width and height.
@@ -29,7 +30,7 @@ class Rectangle:
 
     @property
     def width(self):
-        """int: The width of the rectangle."""
+        """int: Gets or sets the width of the rectangle."""
         return self.__width
 
     @width.setter
@@ -42,7 +43,7 @@ class Rectangle:
 
     @property
     def height(self):
-        """int: The height of the rectangle."""
+        """int: Gets or sets the height of the rectangle."""
         return self.__height
 
     @height.setter
@@ -53,27 +54,22 @@ class Rectangle:
             raise ValueError("height must be >= 0")
         self.__height = value
 
-    def area(self):
-        """Calculate the area of the rectangle."""
-        return self.width * self.height
-
-    def perimeter(self):
-        """Calculate the perimeter of the rectangle."""
-        if self.width == 0 or self.height == 0:
-            return 0
-        return 2 * (self.width + self.height)
-
     def __str__(self):
-        """Visual representation of the rectangle using '#' characters."""
+        """Visual representation of the rectangle using the .
+        
+        Returns a string representation of the rectangle using the print_symbol
+        or a combination of symbols if print_symbol is a list or a non-standard data type.
+        """
         if self.width == 0 or self.height == 0:
             return ""
-        return "\n".join(Rectangle.print_symbol * self.width for _ in range(self.height))
+        symbol = str(self.print_symbol) if isinstance(self.print_symbol, str) else "".join(str(x) for x in self.print_symbol)
+        return "\n".join(symbol * self.width for _ in range(self.height))
 
     def __repr__(self):
         """Official string representation of the Rectangle."""
         return f"Rectangle({self.width}, {self.height})"
 
     def __del__(self):
-        """Destructor to decrement instance count and print a message."""
+        """Destructor to decrement the instance count and print a message."""
         Rectangle.number_of_instances -= 1  
         print("Bye rectangle...")
