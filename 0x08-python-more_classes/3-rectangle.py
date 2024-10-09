@@ -1,3 +1,11 @@
+#!/usr/bin/python3
+"""Module 0-rectangle
+
+This module defines a class Rectangle that serves as a template
+to define a rectangle. This class can be expanded later with properties
+and methods that describe the characteristics and behaviors of a rectangle.
+"""
+
 class Rectangle:
     """Class that defines a rectangle."""
 
