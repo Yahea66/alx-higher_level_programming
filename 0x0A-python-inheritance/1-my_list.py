@@ -1,5 +1,15 @@
 #!/usr/bin/python3
 
+"""
+This module extends built-in Python data structures to add additional functionality.
+Currently, it includes a subclass of the built-in list called MyList, which extends
+the functionality of the standard list by adding a method to print the elements in
+sorted order without altering the original list.
+
+Classes:
+    MyList: A subclass of the built-in list with an added method to print sorted elements.
+"""
+
 class MyList(list):
     """
     MyList extends the built-in Python list by adding a method to print the list
