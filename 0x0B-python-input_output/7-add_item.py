@@ -1,6 +1,10 @@
 #!/usr/bin/python3
 """
 This module provides a set of functions to manage I/O operations.
+
+functions:
+    load_from_json_file: creates an Object from a “JSON file”
+    save_to_json_file: writes an Object to a text file, using a JSON representation
 """
 
 import sys
