@@ -19,11 +19,6 @@ class Rectangle(Base):
         x (int): X-coordinate of the rectangle, must be a non-negative integer.
         y (int): Y-coordinate of the rectangle, must be a non-negative integer.
         id (int): An optional unique identifier managed by the Base class.
-
-    Raises:
-        TypeError: If , , , or  are not integers.
-        ValueError: If  or  are not greater than zero.
-        ValueError: If  or  are negative.
     """
 
     def __init__(self, width, height, x=0, y=0, id=None):
@@ -36,11 +31,6 @@ class Rectangle(Base):
             x (int, optional): The x-coordinate of the rectangle, defaults to 0.
             y (int, optional): The y-coordinate of the rectangle, defaults to 0.
             id (int, optional): An optional identifier that uniquely identifies the rectangle instance.
-        
-        Raises:
-            TypeError: If , , , or  are not integers.
-            ValueError: If  or  are <= 0.
-            ValueError: If  or  are < 0.
         """
         self.width = width
         self.height = height
@@ -50,18 +40,10 @@ class Rectangle(Base):
 
     @property
     def width(self):
-        """Gets the width of the rectangle."""
         return self.__width
 
     @width.setter
     def width(self, value):
-        """
-        Sets the width of the rectangle.
-        
-        Raises:
-            TypeError: If the value is not an integer.
-            ValueError: If the value is not greater than zero.
-        """
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
         if value <= 0:
@@ -70,18 +52,10 @@ class Rectangle(Base):
 
     @property
     def height(self):
-        """Gets the height of the rectangle."""
         return self.__height
 
     @height.setter
     def height(self, value):
-        """
-        Sets the height of the rectangle.
-        
-        Raises:
-            TypeError: If the value is not an integer.
-            ValueError: If the value is not greater than zero.
-        """
         if not isinstance(value, int):
             raise TypeError("height must be an integer")
         if value <= 0:
@@ -90,18 +64,10 @@ class Rectangle(Base):
 
     @property
     def x(self):
-        """Gets the x-coordinate of the rectangle."""
         return self.__x
 
     @x.setter
     def x(self, value):
-        """
-        Sets the x-coordinate of the rectangle.
-        
-        Raises:
-            TypeError: If the value is not an integer.
-            ValueError: If the value is negative.
-        """
         if not isinstance(value, int):
             raise TypeError("x must be an integer")
         if value < 0:
@@ -110,38 +76,31 @@ class Rectangle(Base):
 
     @property
     def y(self):
-        """Gets the y-coordinate of the rectangle."""
         return self.__y
 
     @y.setter
     def y(self, value):
-        """
-        Sets the y-coordinate of the rectangle.
-        
-        Raises:
-            TypeError: If the value is not an integer.
-            ValueError: If the value is negative.
-        """
         if not isinstance(value, int):
             raise TypeError("y must be an integer")
         if value < 0:
             raise ValueError("y must be >= 0")
         self.__y = value
-       
-    def area(self):
-        """
-        Calculate and return the area of the rectangle.
-        
-        Returns:
-            int: The area of the rectangle, calculated as width multiplied by height.
-        """
-        return self.__width * self.__height
-       
-    def display(self):
-        """
-        Prints a visual representation of the rectangle using hashes (#) based on its width and height only.
 
-        This version of the method ignores any x and y offsets and always starts from the top-left corner of the output area.
-        """
+    def area(self):
+        return self.__width * self.__height
+
+    def display(self):
         for _ in range(self.__height):
             print("#" * self.__width)
+
+    def __str__(self):
+        """
+        Return the string representation of the Rectangle instance.
+        
+        This method provides a quick, formatted summary of the rectangle's state, including its unique identifier,
+        position coordinates, and size dimensions. It is especially useful for debugging and logging purposes.
+        
+        Returns:
+            str: A string in the format "[Rectangle] (id) x/y - width/height".
+        """
+        return f"[Rectangle] ({self.id}) {self.__x}/{self.__y} - {self.__width}/{self.__height}"
