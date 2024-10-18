@@ -136,3 +136,12 @@ class Rectangle(Base):
             int: The area of the rectangle, calculated as width multiplied by height.
         """
         return self.__width * self.__height
+       
+    def display(self):
+        """
+        Prints a visual representation of the rectangle using hashes (#) based on its width and height only.
+
+        This version of the method ignores any x and y offsets and always starts from the top-left corner of the output area.
+        """
+        for _ in range(self.__height):
+            print("#" * self.__width)
