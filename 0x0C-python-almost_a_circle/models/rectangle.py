@@ -156,3 +156,14 @@ class Rectangle(Base):
             str: A string in the format "[Rectangle] (id) x/y - width/height".
         """
         return f"[Rectangle] ({self.id}) {self.__x}/{self.__y} - {self.__width}/{self.__height}"
+        
+    def update(self, *args):
+        """
+        Update the rectangle's attributes using the values provided in args.
+
+        This method assigns new values to the rectangle's attributes based on the order they are given in args. The method supports updating 'id', 'width', 'height', 'x', and 'y' in that specific order. Any excess arguments beyond the fifth are ignored.
+        """
+        attributes = ["id", "width", "height", "x", "y"]
+        for index, value in enumerate(args):
+            if index < len(attributes):
+                setattr(self, attributes[index], value)
