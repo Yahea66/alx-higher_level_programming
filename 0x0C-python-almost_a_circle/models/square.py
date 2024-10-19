@@ -29,6 +29,30 @@ class Square(Rectangle):
             id (int, optional): An optional identifier for the square. Defaults to None.
         """
         super().__init__(width=size, height=size, x=x, y=y, id=id)
+    
+    @property 
+    def size(self):
+        """
+        Gets the size of the square. The size is defined as the length of any one side
+        of the square, which is equivalent to either the width or the height (since both
+        are the same for a square).
+        
+        Returns:
+            int: The size of the square.
+        """
+        return self.width
+        
+    @size.setter
+    def size(self, value):
+        """
+        Sets the size of the square. This method ensures that both the width and height
+        are updated together, maintaining the integrity of the square's shape.
+        
+        Parameters:
+            value (int): The new size for the sides of the square.
+        """
+        self.width = value
+        self.height = value 
        
     def __str__(self):
         """
