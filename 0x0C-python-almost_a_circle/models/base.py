@@ -50,3 +50,12 @@ class Base:
         if not list_dictionaries or not isinstance(list_dictionaries, list):
             return "[]"
         return json.dumps(list_dictionaries)
+       
+    @staticmethod
+    def from_json_string(json_string):
+        """
+        returns the list of the JSON string representation json_string
+        """
+        if not json_string or len(json_string) == 0:
+            return []
+        return json.loads(json_string)
