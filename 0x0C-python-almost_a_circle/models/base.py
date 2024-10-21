@@ -7,6 +7,7 @@ The automatic generation is handled through a class-level counter that increment
 """
 
 import json
+import os
 
 class Base:
     """
@@ -34,7 +35,7 @@ class Base:
         else:
             Base.__nb_objects += 1
             self.id = Base.__nb_objects
-
+        
     @staticmethod
     def to_json_string(list_dictionaries):
         """
@@ -50,6 +51,26 @@ class Base:
         if not list_dictionaries or not isinstance(list_dictionaries, list):
             return "[]"
         return json.dumps(list_dictionaries)
+        
+    @classmethod 
+    def save_to_file(cls, list_objs):
+        """
+        Writes the JSON string representation of list_objs to a file.
+
+        Args:
+            list_objs (list): A list of instances that are inherited from Base.
+
+        The filename is derived from the class name of the objects in list_objs and has the format <Class name>.json.
+        If list_objs is None or empty, an empty list is saved.
+        """
+        file_name = f"{cls.__name__}.json"
+        if list_objs is None or list_objs == []:
+            json_string = "[]"
+        else:
+            list_dicts = [obj.to_dictionary() for obj in list_objs]
+            json_string = cls.to_json_string(list_dicts)
+        with open(file_name, 'w') as file:
+            file.write(json_string)
        
     @staticmethod
     def from_json_string(json_string):
@@ -59,3 +80,41 @@ class Base:
         if not json_string or len(json_string) == 0:
             return []
         return json.loads(json_string)
+   
+    @classmethod
+    def create(cls, **dictionary):
+        """
+        Creates an instance with attributes set according to the dictionary provided.
+
+        Args:
+            **dictionary: Arbitrary keyword arguments representing attributes and their values.
+
+        Returns:
+            An instance of cls with attributes set according to the dictionary.
+        """
+        if cls.__name__ == 'Rectangle':
+            dummy_ins = cls(1,1)
+        elif cls.__name__ == 'Square':
+            dummy_ins = cls(1)
+        else:
+            return None
+        dummy_ins.update(**dictionary)
+        return dummy_ins
+    
+    @classmethod 
+    def load_from_file(cls):
+        """
+        returns a list of instances
+        The filename must be: <Class name>.json - example: Rectangle.json
+        If the file doesn’t exist, return an empty list
+        Otherwise, return a list of instances - the type of these instances depends on cls (current class using this method)
+        You must use the from_json_string and create methods (implemented previously)
+        """
+        file_name = f"{cls.__name__}.json"
+        list_objs = []
+        if not os.path.exists(file_name):
+            return []
+        with open(file_name, 'r') as file:
+            json_string = file.read()
+        list_dicts = cls.from_json_string(json_string)
+        return [cls.create(**dic) for dic in list_dicts]
