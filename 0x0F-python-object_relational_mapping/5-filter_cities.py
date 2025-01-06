@@ -23,7 +23,6 @@ if __name__ == "__main__":
     """
     cur.execute(query, (argv[4],))
     rows = cur.fetchall()
-    for row in rows:
-        print(row)
+    print(", ".join(map(lambda x: x[0], rows)))
     cur.close()
     conn.close()
